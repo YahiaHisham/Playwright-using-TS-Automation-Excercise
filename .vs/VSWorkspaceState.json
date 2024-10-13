@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\pages",
+    "\\screenshots",
+    "\\tests",
+    "\\tests-examples",
+    "\\tests\\data",
+    "\\tests\\testClasses",
+    "\\tests\\utilities",
+    "\\traces"
+  ],
+  "SelectedNode": "\\pages\\SignupLoginPage.ts",
+  "PreviewInSolutionExplorer": false
+}
