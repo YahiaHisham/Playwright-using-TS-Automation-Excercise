@@ -2,14 +2,19 @@
   "name": "playwright---automation-excercise",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean:results": "rmdir /s /q allure-results",
+    "report": "npx allure generate --clean && npx allure open && npm run clean:results"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
-    "@playwright/test": "^1.47.2",
-    "@types/node": "^22.7.5"
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.7.5",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.7"
   }
 }
