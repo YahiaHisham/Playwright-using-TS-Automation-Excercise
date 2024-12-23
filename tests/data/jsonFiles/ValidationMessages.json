@@ -1,0 +1,5 @@
+{
+  "AccountCreatedMessage": "Automation Exercise - Account Created",
+  "AccountDeletedMessage": "Account Deleted!",
+  "InvalidLoginCredentialsMessage": "Your email or password is incorrect!"
+}

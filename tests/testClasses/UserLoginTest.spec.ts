@@ -14,5 +14,5 @@ test('verify that user cant login using invalid credentials @smoke @regression',
     await new HomePage(page).clickOnSignupLoginButton();
     await new SignupLoginPage(page).enterLoginData(randomEmail, JsonReader.getValueFromJsonFile('password', 'Credentials'));
     await new SignupLoginPage(page).clickOnLoginButton();
-    await expect(page.locator('form').filter({ hasText: 'Login' }).locator('p')).toHaveText('Your email or password is incorrect!');
+    await expect(page.locator('form').filter({ hasText: 'Login' }).locator('p')).toHaveText(JsonReader.getValueFromJsonFile('InvalidLoginCredentialsMessage','ValidationMessages'));
 });

@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 class JsonReader {
-    private static readonly classLocation = 'tests/data/';
+    private static readonly classLocation = 'tests/data/jsonFiles';
     private static readonly fileExtension = '.json';
     private static readonly greenBoldColor = '\x1b[32;1m';
     private static readonly resetColor = '\x1b[0m';
