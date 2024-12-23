@@ -43,6 +43,9 @@ export class ContactUsPage {
     }
 
     async clickOnSubmitButton() {
+        this.page.on('dialog', dialog => {
+            dialog.accept();
+        })
         await this.submitButton.click();
     }
 
