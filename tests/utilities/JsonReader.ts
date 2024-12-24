@@ -1,15 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+
 class JsonReader {
     private static readonly classLocation = 'tests/data/jsonFiles';
     private static readonly fileExtension = '.json';
-    private static readonly greenBoldColor = '\x1b[32;1m';
-    private static readonly resetColor = '\x1b[0m';
-    private static readonly greenSuccessMessage = `${JsonReader.greenBoldColor}Success! ${JsonReader.resetColor}`;
 
     private static filePath: string;
-    private static jsonObject: any;
 
     /**
      * Sets the file path based on the provided file name.
@@ -22,80 +19,72 @@ class JsonReader {
     }
 
     /**
-     * Loads JSON content from the file.
+     * Updates a value in the JSON file based on the provided key path.
+     * @param keyPath - The key path to update in the JSON file.
+     * @param newValue - The new value to set.
+     * @param fileName - The name of the file to update.
      */
-    private static loadJson(): void {
+    public static updateValueInJsonFile(keyPath: string, newValue: any, fileName: string): void {
         try {
-            const fileContent = fs.readFileSync(this.filePath, 'utf-8');
-            this.jsonObject = JSON.parse(fileContent);
+            // Set the file path
+            this.setFilePath(fileName);
+
+            // Load the JSON file
+            const fileData = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+
+            // Traverse and update the value at the specified key path
+            const keys = keyPath.split('.');
+            let current = fileData;
+
+            for (let i = 0; i < keys.length - 1; i++) {
+                const key = keys[i];
+                if (!current[key]) {
+                    throw new Error(`Key path '${keyPath}' not found`);
+                }
+                current = current[key];
+            }
+
+            // Update the final key with the new value
+            current[keys[keys.length - 1]] = newValue;
+
+            // Save the updated JSON file
+            fs.writeFileSync(this.filePath, JSON.stringify(fileData, null, 2), 'utf-8');
+            console.log(`Updated keyPath '${keyPath}' with value '${newValue}' successfully.`);
         } catch (error) {
-            console.error('Error loading JSON:', error);
+            console.error(`Error updating JSON file: ${error.message}`);
         }
     }
 
     /**
-     * Retrieves a value from the JSON file based on the given key.
-     * @param key - The key to search for in the JSON file.
-     * @param fileName - The name of the JSON file to read from.
-     * @returns The value associated with the key, or an error message if the key is not found.
+     * Retrieves a value from the JSON file based on the provided key path.
+     * @param keyPath - The key path to retrieve from the JSON file.
+     * @param fileName - The name of the file to retrieve from.
+     * @returns The value at the specified key path.
      */
-    public static getValueFromJsonFile(key: string, fileName: string): string {
-        this.setFilePath(fileName);
-        this.loadJson();
-
-        if (!this.jsonObject) {
-            console.error('Error: JSON object is undefined. Please check if the file was loaded correctly.');
-            return `Failed to load JSON file: ${fileName}`;
-        }
-
-        const value = this.jsonObject[key];
-        console.log(`Getting the value of ${key}...`);
-        if (value !== undefined) {
-            console.log(`${this.greenSuccessMessage} Successfully got the key '${key}' value`);
-            return value.toString();
-        } else {
-            return `Cannot find the key '${key}' in the JSON file.`;
-        }
-    }
-
-    /**
-     * Updates a value in the JSON file based on the given key and value.
-     * @param key - The key to update in the JSON file.
-     * @param value - The new value to set for the key.
-     * @param fileName - The name of the JSON file to update.
-     */
-    public static updateValueInJsonFile(key: string, value: any, fileName: string): void {
-        this.setFilePath(fileName);
-        this.loadJson();
-        this.jsonObject[key] = value;
-        this.saveChanges();
-        console.log(`${this.greenSuccessMessage} Successfully updated the key '${key}' value to '${value}'`);
-        this.formatJsonFile(this.filePath);
-    }
-
-    /**
-     * Saves changes to the JSON file.
-     */
-    private static saveChanges(): void {
+    public static getValueFromJsonFile(keyPath: string, fileName: string): any {
         try {
-            fs.writeFileSync(this.filePath, JSON.stringify(this.jsonObject, null, 2), 'utf-8');
-        } catch (error) {
-            console.error('Error saving JSON:', error);
-        }
-    }
+            // Set the file path
+            this.setFilePath(fileName);
 
-    /**
-     * Formats the JSON file to be human-readable.
-     * @param filePath - The path to the JSON file to format.
-     */
-    public static formatJsonFile(filePath: string): void {
-        try {
-            const jsonContent = fs.readFileSync(filePath, 'utf-8');
-            const jsonObject = JSON.parse(jsonContent);
-            const formattedJson = JSON.stringify(jsonObject, null, 2);
-            fs.writeFileSync(filePath, formattedJson, 'utf-8');
+            // Load the JSON file
+            const fileData = JSON.parse(fs.readFileSync(this.filePath, 'utf-8'));
+
+            // Traverse the JSON object using the key path to retrieve the value
+            const keys = keyPath.split('.');
+            let current = fileData;
+
+            for (const key of keys) {
+                if (!current.hasOwnProperty(key)) {
+                    throw new Error(`Key path '${keyPath}' not found`);
+                }
+                current = current[key];
+            }
+
+            console.log(`Retrieved value at keyPath '${keyPath}': ${current}`);
+            return current; // Return the value found at the key path
         } catch (error) {
-            console.error('Error formatting JSON file:', error);
+            console.error(`Error reading value from JSON file: ${error.message}`);
+            throw error;
         }
     }
 }
