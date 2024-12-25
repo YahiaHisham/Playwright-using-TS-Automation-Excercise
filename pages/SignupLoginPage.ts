@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 
 export class SignupLoginPage {
+
     readonly page: Page;
     private readonly signupName: Locator;
     private readonly signupEmail: Locator;
@@ -9,7 +10,6 @@ export class SignupLoginPage {
     private readonly loginPasswordField: Locator;
     private readonly loginButton: Locator;
     private readonly invalidLoginCredentialsMessage: Locator;
-
 
     constructor(page: Page) {
         this.page = page;
@@ -49,12 +49,10 @@ export class SignupLoginPage {
     }
 
     async enterSignupData(name: string, email: string) {
-        //(await (await (await this.enterSignupName(name)).enterSignupEmail(email)).clickOnSignupButton());
         // using then() to replace duplicating await and confusion of its prackets
         await this.enterSignupName(name)
             .then(() => this.enterSignupEmail(email))
             .then(() => this.clickOnSignupButton());
-
     }
 
     async enterLoginData(email: string, password: string) {

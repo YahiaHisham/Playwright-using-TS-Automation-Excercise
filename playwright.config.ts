@@ -2,14 +2,11 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
     testDir: './tests',
-    // timeout: 10*1000,
     /* Run tests in files in parallel */
-    fullyParallel: true,
-    /* Fail the build on CI if you accidentally left test.only in the source code. */
-    forbidOnly: !!process.env.CI,
+    fullyParallel: false,
     /* Retry Failed Cases */
     retries: 1,
-    /* how many workers in run paralell */
+    /* how many workers while running paralell */
     workers: undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     reporter: [
@@ -18,11 +15,8 @@ export default defineConfig({
     ],
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
-        /* Base URL to use in actions like `await page.goto('/')`. */
-        // baseURL: 'http://127.0.0.1:3000',
-
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'on-first-retry',
+        trace: 'on-first-retry', // Record video for each test, but remove all videos from successful test runs
     },
 
     /* Configure projects for major browsers */
@@ -33,10 +27,9 @@ export default defineConfig({
             use: {
                 ...devices['Desktop Chrome'],
                 baseURL: 'https://automationexercise.com',
-                headless: true,
+                headless: false,
                 screenshot: 'on',
-                video: 'retain-on-failure',
-                trace: 'on',
+                video: 'retain-on-failure'
             },
         }
     ]

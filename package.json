@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test && npm run report",
-    "clean:results": "rmdir /s /q allure-results",
-    "report": "npx allure generate --clean && npx allure open && npm run clean:results"
+    "clean:allure:results": "rmdir /s /q allure-results",
+    "report": "npx allure generate --clean && npx allure open && npm run clean:allure:results"
   },
   "keywords": [],
   "author": "",

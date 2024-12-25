@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 
 export class SignupPage {
+
     private readonly page: Page;
     private readonly mrRadioButton: Locator;
     private readonly passwordField: Locator;
@@ -15,6 +16,7 @@ export class SignupPage {
     private readonly mobileNumberField: Locator;
     private readonly createAccountButton: Locator;
     private readonly continueButton: Locator;
+    
     constructor(page: Page) {
         this.page = page;
         this.mrRadioButton = page.getByLabel('Mr.');
