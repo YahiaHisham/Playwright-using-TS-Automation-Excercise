@@ -16,9 +16,9 @@ export class ContactUsPage {
 		this.page = page;
 		this.nameField = page.getByPlaceholder('Name');
 		this.emailField = page.getByPlaceholder('Email', { exact: true });
-		this.subjectField = page.getByPlaceholder('Subject')
-		this.messageField = page.getByPlaceholder('Your Message Here')
-        this.uploadfileButton = page.locator('input[type="file"]');
+		this.subjectField = page.getByPlaceholder('Subject');
+		this.messageField = page.getByPlaceholder('Your Message Here');
+        this.uploadfileButton = page.locator('input[name="upload_file"]');
         this.submitButton = page.getByRole('button', { name: 'Submit' });
 	}
 
@@ -39,18 +39,27 @@ export class ContactUsPage {
 	}
 
     async uploadFile() {
-        await this.uploadfileButton.setInputFiles('tests/data/images/userLogout.png');
+        const filePath = path.resolve(__dirname, '../tests/data/images/nature.jpg');
+        await this.uploadfileButton.setInputFiles(filePath);
+        await this.page.waitForLoadState('networkidle'); 
+        return this;
     }
 
     async clickOnSubmitButton() {
+        this.page.on('dialog', dialog => {
+            dialog.accept();
+        })
         await this.submitButton.click();
+        return this;
     }
 
     async fillFormData(name:string, email:string,subject:string,message:string) {
+        await this.uploadFile();
         await this.enterName(name);
         await this.enterEmail(email);
         await this.enterSubject(subject);
         await this.enterMessage(message);
+        return this;
     }
 
 }

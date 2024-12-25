@@ -61,4 +61,8 @@ export class SignupLoginPage {
         await this.enterLoginEmail(email);
         await this.enterLoginPassword(password);
     }
+
+    async getInvalidLoginCredentialsMessage() {
+        return await this.invalidLoginCredentialsMessage.textContent();
+    }
 }

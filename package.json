@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "npx playwright test && npm run report",
     "clean:results": "rmdir /s /q allure-results",
     "report": "npx allure generate --clean && npx allure open && npm run clean:results"
   },
