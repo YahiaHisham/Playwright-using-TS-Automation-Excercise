@@ -42,6 +42,7 @@ export class ContactUsPage {
         const filePath = path.resolve(__dirname, '../tests/data/images/nature.jpg');
         await this.uploadfileButton.setInputFiles(filePath);
         await this.page.waitForLoadState('networkidle'); 
+        return this;
     }
 
     async clickOnSubmitButton() {
@@ -49,6 +50,7 @@ export class ContactUsPage {
             dialog.accept();
         })
         await this.submitButton.click();
+        return this;
     }
 
     async fillFormData(name:string, email:string,subject:string,message:string) {
@@ -57,6 +59,7 @@ export class ContactUsPage {
         await this.enterEmail(email);
         await this.enterSubject(subject);
         await this.enterMessage(message);
+        return this;
     }
 
 }

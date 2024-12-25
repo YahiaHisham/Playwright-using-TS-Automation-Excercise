@@ -1,8 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage'
-import { SignupLoginPage } from '../../pages/SignupLoginPage';
 import { faker } from '@faker-js/faker'
-import JsonReader from '../utilities/JsonReader'
 import { ContactUsPage } from '../../pages/ContactUsPage';
 import * as allure from "allure-js-commons";
 import { HeaderPage } from '../../pages/HeaderPage';

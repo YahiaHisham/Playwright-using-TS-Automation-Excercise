@@ -49,17 +49,5 @@ export class ProductsPage extends PageBase {
         await this.productCard.nth(1).hover();
         await this.addToCartButton.nth(2).click();
         await this.viewCartButton.click();
-    }
-    // lessa el methods dy msh kamla
-    async isProductPricesCorrect(productPrices: string[]) {
-        return await this.assertTextExistsInCards(this.productPrice, productPrices);
-    }
-
-    async isProductQuantityCorrect(productQuantity: string[]) {
-        return await this.assertTextExistsInCards(this.productPrice, productQuantity);
-    }
-
-    async isProdctTotalPriceCorrect(productTotalPrice: string[]) {
-        return await this.assertTextExistsInCards(this.productPrice, productTotalPrice);
-    }
+    }    
 }
