@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
     testDir: './tests',
     /* Run tests in files in parallel */
-    fullyParallel: false,
+    fullyParallel: true,
     /* Retry Failed Cases */
     retries: 1,
     /* how many workers while running paralell */
@@ -27,7 +27,7 @@ export default defineConfig({
             use: {
                 ...devices['Desktop Chrome'],
                 baseURL: 'https://automationexercise.com',
-                headless: false,
+                headless: true,
                 screenshot: 'on',
                 video: 'retain-on-failure'
             },
