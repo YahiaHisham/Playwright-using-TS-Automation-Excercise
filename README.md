@@ -4,12 +4,11 @@
 this project I used to practice playwright using typescript and for reporting I used HTML and Allure reporting with Page Object Model design pattern.
 
 ## Table of Contents
-- [System requirements](#System-requirements)
-- [Installation](#Installation)
+- [System requirements](#system-requirements)
+- [Installation](#installation)
+- [Running Tests](#running-yests)
 - [Project Structure](#project-structure)
-- [Running Tests](#Running-Tests)
-- [Contributing](#contributing)
-- [License](#license)
+- [Author](#author)
 
 ## System requirements
 - [Node.js 18+ - Click To Download](https://nodejs.org/en/download/package-manager/current)
