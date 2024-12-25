@@ -1,5 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test'
-import JsonReader from '../tests/utilities/JsonReader';
 import { PageBase } from './PageBase';
 export class CartPage extends PageBase {
 

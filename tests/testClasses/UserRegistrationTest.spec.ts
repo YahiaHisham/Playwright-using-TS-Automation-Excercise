@@ -5,14 +5,23 @@ import { SignupPage } from '../../pages/SignupPage';
 import { faker } from '@faker-js/faker'
 import JsonReader from '../utilities/JsonReader'
 import { HeaderPage } from '../../pages/HeaderPage';
+import * as allure from "allure-js-commons";
 
-test.beforeEach('has title', async ({ page }) => {
+test.beforeEach('navigate to starting page', async ({ page }) => {
     // this is to read te base URL from playwright.config file
     await page.goto('/');
     await new HeaderPage(page).clickOnSignupLoginButton();
 });
 
 test('verify that user can register using valid data @smoke @regression', async ({ page }) => {
+    await allure.displayName("Register with valid data");
+    await allure.owner("Yahia Hisham");
+    await allure.severity("critical");
+    await allure.epic("Web");
+    await allure.feature("Registration");
+    await allure.story("As User, I want to register using valid data");
+    await allure.suite("Regression Test");
+
     const randomFullName = faker.person.fullName();
     const randomEmail = `${faker.person.firstName()}${faker.number.int(1000)}@test.com`;
     await new SignupLoginPage(page).enterSignupData(randomFullName, randomEmail);
@@ -22,6 +31,14 @@ test('verify that user can register using valid data @smoke @regression', async 
 });
 
 test('verify that user can Delete his account @smoke @regression', async ({ page }) => {
+    await allure.displayName("Add Products To Cart");
+    await allure.owner("Yahia Hisham");
+    await allure.severity("critical");
+    await allure.epic("Web");
+    await allure.feature("Registration");
+    await allure.story("As User, I want to delete my account after registration");
+    await allure.suite("Smoke Test");
+
     const randomFullName = faker.person.fullName();
     const randomEmail = `${faker.person.firstName()}${faker.number.int(1000)}@test.com`;
     await new HeaderPage(page).clickOnSignupLoginButton();

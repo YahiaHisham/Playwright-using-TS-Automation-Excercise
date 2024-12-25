@@ -13,7 +13,7 @@ export class PageBase {
    * @param wordsArray {string[]} The array of words you want to check.
    */
   async assertTextExistsInCards(cardsLocator: Locator, wordsArray: string[]): Promise<boolean> {
-    await this.page.waitForLoadState();
+    await this.page.waitForLoadState('domcontentloaded');
     const cardCount = await cardsLocator.count();
     // Loop through each word in wordsArray
     for (const word of wordsArray) {

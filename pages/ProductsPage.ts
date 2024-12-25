@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test'
+import { Locator, Page } from '@playwright/test'
 import JsonReader from '../tests/utilities/JsonReader';
 import { PageBase } from './PageBase';
 export class ProductsPage extends PageBase {
@@ -35,7 +35,7 @@ export class ProductsPage extends PageBase {
     }
 
     async isProductDisplayed(word: string[]) {
-       return await this.assertTextExistsInCards(this.productNameText, word);
+        return await this.assertTextExistsInCards(this.productNameText, word);
     }
 
     async addProductToCart() {
@@ -49,5 +49,5 @@ export class ProductsPage extends PageBase {
         await this.productCard.nth(1).hover();
         await this.addToCartButton.nth(2).click();
         await this.viewCartButton.click();
-    }    
+    }
 }
